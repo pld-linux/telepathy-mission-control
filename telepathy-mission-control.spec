@@ -14,6 +14,8 @@ BuildRequires:	libtelepathy-devel
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
+BuildRequires:	GConf2-devel
+BuildRequires:	gtk-doc-automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
