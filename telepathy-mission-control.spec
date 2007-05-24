@@ -57,6 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 	HTML_DIR=%{_gtkdocdir}
 
 install -d $RPM_BUILD_ROOT%{_libdir}/mission-control
+install -d $RPM_BUILD_ROOT%{_datadir}/mission-control
+install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,11 +71,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/mc-account
 %attr(755,root,root) %{_bindir}/mission-control
-%attr(755,root,root) %{_libdir}/libmissioncontrol-config.so.0.0.0
-%attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.0.0.0
-%attr(755,root,root) %{_libdir}/libmissioncontrol.so.0.0.0
+%attr(755,root,root) %{_libdir}/*.so.*.*.*
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
 %dir %{_libdir}/mission-control
+%dir %{_datadir}/mission-control
+%dir %{_datadir}/mission-control/profiles
 
 %files devel
 %defattr(644,root,root,755)
@@ -81,9 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libmissioncontrol/*.h
 %dir %{_includedir}/mission-control
 %{_includedir}/mission-control/*.h
-%{_libdir}/libmissioncontrol-config.la
-%{_libdir}/libmissioncontrol.la
-%{_libdir}/libmissioncontrol-server.la
+%{_libdir}/*.la
+%{_libdir}/*.so
 %{_pkgconfigdir}/*.pc
 %{_gtkdocdir}/*
 
