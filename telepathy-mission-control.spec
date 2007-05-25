@@ -1,4 +1,5 @@
 Summary:	A Telepathy account manager
+Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
 Version:	4.22
 Release:	1
@@ -7,35 +8,46 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
 # Source0-md5:	aa8a8264c596c666f886f85356b56e09
 URL:		http://mission-control.sourceforge.net/
+BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	dbus-glib-devel >= 0.61
+BuildRequires:	gtk-doc-automake
 BuildRequires:	libtelepathy-devel
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	GConf2-devel
-BuildRequires:	gtk-doc-automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 An account manager for Telepathy.
 
+%description -l pl.UTF-8
+Zarządca kont dla Telepathy.
+
 %package devel
 Summary:	Header files for mission control library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki mission control
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for mission control library.
 
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki mission control.
+
 %package static
 Summary:	Static mission control library
+Summary(pl.UTF-8):	Statyczna biblioteka mission control
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static mission control library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka mission control.
 
 %prep
 %setup -q
@@ -79,12 +91,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*.so
+%{_libdir}/*.la
 %dir %{_includedir}/libmissioncontrol
 %{_includedir}/libmissioncontrol/*.h
 %dir %{_includedir}/mission-control
 %{_includedir}/mission-control/*.h
-%{_libdir}/*.la
-%{_libdir}/*.so
 %{_pkgconfigdir}/*.pc
 %{_gtkdocdir}/*
 
