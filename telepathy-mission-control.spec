@@ -1,19 +1,23 @@
+#
+# Conditional build:
+%bcond_without	apidocs		# disable gtk-doc
+#
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	4.22
+Version:	4.23
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	aa8a8264c596c666f886f85356b56e09
+# Source0-md5:	4bc233651576d358c1755be13ba449ef
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	dbus-glib-devel >= 0.61
-BuildRequires:	gtk-doc-automake
-BuildRequires:	libtelepathy-devel
+%{?with_apidocs:BuildRequires:	gtk-doc-automake}
+BuildRequires:	libtelepathy-devel >= 0.0.50
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
@@ -49,6 +53,18 @@ Static mission control library.
 %description static -l pl.UTF-8
 Statyczna biblioteka mission control.
 
+%package apidocs
+Summary:	mission control library API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki mission control
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+mission control library API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki mission control.
+
 %prep
 %setup -q
 
@@ -58,19 +74,22 @@ Statyczna biblioteka mission control.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
+	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	HTML_DIR=%{_gtkdocdir}
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/mission-control
 install -d $RPM_BUILD_ROOT%{_datadir}/mission-control
 install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
+
+%{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,10 +117,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/mission-control
 %{_includedir}/mission-control/*.h
 %{_pkgconfigdir}/*.pc
-%{_gtkdocdir}/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libmissioncontrol-config.a
 %{_libdir}/libmissioncontrol-server.a
 %{_libdir}/libmissioncontrol.a
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/*
+%endif
