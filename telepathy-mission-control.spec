@@ -5,19 +5,19 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	4.33
+Version:	4.49
 Release:	1
-License:	LGPL
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	5fdfc0bb694c56942bebc6e97f9fdcc5
+# Source0-md5:	463234dcf1182ba71a0d39f594922488
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	dbus-glib-devel >= 0.61
 %{?with_apidocs:BuildRequires:	gtk-doc-automake}
-BuildRequires:	libtelepathy-devel >= 0.0.50
+BuildRequires:	libtelepathy-devel >= 0.0.54
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
@@ -102,7 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/mc-account
 %attr(755,root,root) %{_bindir}/mission-control
-%attr(755,root,root) %{_libdir}/*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libmissioncontrol-client.so.*.*.*
+%attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.*.*.*
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
 %dir %{_libdir}/mission-control
 %dir %{_datadir}/mission-control
@@ -110,8 +111,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/libmissioncontrol-client.so
+%attr(755,root,root) %{_libdir}/libmissioncontrol-server.so
+%{_libdir}/libmissioncontrol-client.la
+%{_libdir}/libmissioncontrol-server.la
 %dir %{_includedir}/libmissioncontrol
 %{_includedir}/libmissioncontrol/*.h
 %dir %{_includedir}/mission-control
@@ -120,12 +123,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libmissioncontrol-config.a
+%{_libdir}/libmissioncontrol-client.a
 %{_libdir}/libmissioncontrol-server.a
-%{_libdir}/libmissioncontrol.a
 
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/*
+%{_gtkdocdir}/libmissioncontrol
+%{_gtkdocdir}/libmissioncontrol-server
 %endif
