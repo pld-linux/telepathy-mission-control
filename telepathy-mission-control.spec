@@ -6,7 +6,7 @@ Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
 Version:	4.54
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
@@ -92,6 +92,12 @@ install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%pretrans
+# this needs to be a file
+if [ -d %{_libexecdir}/mission-control ]; then
+	mv -f %{_libexecdir}/mission-control{,.rpmsave}
+fi
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
