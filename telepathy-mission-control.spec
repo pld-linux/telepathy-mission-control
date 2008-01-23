@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %pretrans
 # this needs to be a file
 if [ -d %{_libexecdir}/mission-control ]; then
-	mv -f %{_libexecdir}/mission-control{,.rpmsave}
+	rm -rf %{_libexecdir}/mission-control
 fi
 
 %post	-p /sbin/ldconfig
@@ -110,7 +110,6 @@ fi
 %attr(755,root,root) %{_libdir}/libmissioncontrol-client.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.*.*.*
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
-%dir %{_libdir}/mission-control
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
 
