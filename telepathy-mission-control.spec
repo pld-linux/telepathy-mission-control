@@ -107,9 +107,9 @@ fi
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/mc-account
 %attr(755,root,root) %{_libexecdir}/mission-control
+%attr(755,root,root) %{_libdir}/libmcclient.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmissioncontrol-client.so.*.*.*
 %attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.*.*.*
-%attr(755,root,root)    %{_libdir}/libmcclient.so.*.*.*
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
@@ -117,12 +117,12 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libmcclient.so
 %attr(755,root,root) %{_libdir}/libmissioncontrol-client.so
 %attr(755,root,root) %{_libdir}/libmissioncontrol-server.so
+%{_libdir}/libmcclient.la
 %{_libdir}/libmissioncontrol-client.la
 %{_libdir}/libmissioncontrol-server.la
-%{_libdir}/libmcclient.la
-%{_libdir}/libmcclient.so
 %dir %{_includedir}/libmcclient/_gen
 %{_includedir}/libmcclient/_gen/*.h
 %dir %{_includedir}/libmcclient/
@@ -139,9 +139,9 @@ fi
 
 %files static
 %defattr(644,root,root,755)
+%{_libdir}/libmcclient.a
 %{_libdir}/libmissioncontrol-client.a
 %{_libdir}/libmissioncontrol-server.a
-%{_libdir}/libmcclient.a
 
 %if %{with apidocs}
 %files apidocs
