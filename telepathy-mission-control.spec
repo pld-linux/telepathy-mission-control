@@ -5,12 +5,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	4.64
+Version:	4.67
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	e232060c1b6cf9afa84160a1d2d405fb
+# Source0-md5:	0a547e7af4a33355bac3638dd2e40859
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
@@ -108,8 +108,11 @@ fi
 %attr(755,root,root) %{_bindir}/mc-account
 %attr(755,root,root) %{_libexecdir}/mission-control
 %attr(755,root,root) %{_libdir}/libmcclient.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmcclient.so.5
 %attr(755,root,root) %{_libdir}/libmissioncontrol-client.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmissioncontrol-client.so.0
 %attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmissioncontrol-server.so.1
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
