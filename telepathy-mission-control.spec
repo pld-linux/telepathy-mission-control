@@ -5,12 +5,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	4.67
+Version:	5.2.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	0a547e7af4a33355bac3638dd2e40859
+Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
+# Source0-md5:	dc7ce2105d1f569a1a6f7db06be4bc68
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
@@ -70,7 +70,7 @@ Dokumentacja API biblioteki mission control.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -105,50 +105,37 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README
-%attr(755,root,root) %{_bindir}/mc-account
-%attr(755,root,root) %{_libexecdir}/mission-control
-%attr(755,root,root) %{_libdir}/libmcclient.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmcclient.so.5
-%attr(755,root,root) %{_libdir}/libmissioncontrol-client.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmissioncontrol-client.so.0
-%attr(755,root,root) %{_libdir}/libmissioncontrol-server.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmissioncontrol-server.so.1
-%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl.service
+%attr(755,root,root) %{_bindir}/mc-account-convert
+%attr(755,root,root) %{_bindir}/mc-tool
+%attr(755,root,root) %{_bindir}/mc-wait-for-name
+%attr(755,root,root) %{_libexecdir}/mission-control-5
+%{_mandir}/man1/mc-account-convert.1*
+%{_mandir}/man1/mc-tool.1*
+%{_mandir}/man1/mc-wait-for-name.1*
+%{_mandir}/man8/mission-control-5.8*
+%attr(755,root,root) %{_libdir}/libmcclient-%{version}.so
+%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.AccountManager.service
+%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl5.service
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
-
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libmcclient.so
-%attr(755,root,root) %{_libdir}/libmissioncontrol-client.so
-%attr(755,root,root) %{_libdir}/libmissioncontrol-server.so
-%{_libdir}/libmcclient.la
-%{_libdir}/libmissioncontrol-client.la
-%{_libdir}/libmissioncontrol-server.la
-%dir %{_includedir}/libmcclient/_gen
-%{_includedir}/libmcclient/_gen/*.h
-%dir %{_includedir}/libmcclient/
-%{_includedir}/libmcclient/*.h
-%dir %{_includedir}/libmissioncontrol
-%{_includedir}/libmissioncontrol/*.h
-%dir %{_includedir}/libmissioncontrol/_gen
-%{_includedir}/libmissioncontrol/_gen/*.h
-%dir %{_includedir}/mission-control
-%{_includedir}/mission-control/*.h
-%dir %{_includedir}/mission-control/_gen/
-%{_includedir}/mission-control/_gen/*.h
-%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libmcclient.a
-%{_libdir}/libmissioncontrol-client.a
-%{_libdir}/libmissioncontrol-server.a
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libmcclient.so
+%{_libdir}/libmcclient.la
+%dir %{_includedir}/libmcclient/_gen
+%{_includedir}/libmcclient/_gen/*.h
+%dir %{_includedir}/libmcclient/
+%{_includedir}/libmcclient/*.h
+%{_pkgconfigdir}/*.pc
 
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/libmissioncontrol
+%{_gtkdocdir}/libmcclient
 %{_gtkdocdir}/libmissioncontrol-server
 %endif
