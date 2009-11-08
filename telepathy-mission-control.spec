@@ -5,22 +5,23 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.2.0
+Version:	5.2.6
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	dc7ce2105d1f569a1a6f7db06be4bc68
+# Source0-md5:	21763710a1db21d71905a4e7c64a1742
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.8
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.61
-%{?with_apidocs:BuildRequires:	gtk-doc-automake}
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.3}
 BuildRequires:	libtelepathy-devel >= 0.0.54
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
+BuildRequires:	telepathy-glib-devel >= 0.7.32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -34,6 +35,8 @@ Summary:	Header files for mission control library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki mission control
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	dbus-glib-devel >= 0.61
+Requires:	telepathy-glib-devel >= 0.7.32
 
 %description devel
 Header files for mission control library.
@@ -81,12 +84,10 @@ Dokumentacja API biblioteki mission control.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{_datadir}/mission-control
-install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
@@ -119,10 +120,6 @@ fi
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
 
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libmcclient.a
-
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmcclient.so
@@ -132,6 +129,10 @@ fi
 %dir %{_includedir}/libmcclient/
 %{_includedir}/libmcclient/*.h
 %{_pkgconfigdir}/*.pc
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libmcclient.a
 
 %if %{with apidocs}
 %files apidocs
