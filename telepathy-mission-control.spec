@@ -16,11 +16,13 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.61
+BuildRequires:	docbook-dtd412-xml
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.3}
 BuildRequires:	libtelepathy-devel >= 0.0.54
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
+BuildRequires:	python-modules
 BuildRequires:	telepathy-glib-devel >= 0.7.32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
