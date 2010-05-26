@@ -6,7 +6,7 @@ Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
 Version:	5.4.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
@@ -24,6 +24,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
 BuildRequires:	telepathy-glib-devel >= 0.7.32
+Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -91,6 +92,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_datadir}/telepathy/{clients,managers}
+
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 %clean
@@ -121,6 +124,9 @@ fi
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl5.service
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
+%dir %{_datadir}/telepathy
+%dir %{_datadir}/telepathy/clients
+%dir %{_datadir}/telepathy/managers
 
 %files devel
 %defattr(644,root,root,755)
