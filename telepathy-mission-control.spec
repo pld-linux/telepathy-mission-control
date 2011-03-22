@@ -5,12 +5,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.7.2
+Version:	5.7.7
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	63cd8ab39e335f39ee31963d8b892f0d
+# Source0-md5:	46d93d68f18862bbc023cc0a96a949ec
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
@@ -23,7 +23,7 @@ BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	python-modules
-BuildRequires:	telepathy-glib-devel >= 0.11.9
+BuildRequires:	telepathy-glib-devel >= 0.13.14
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,7 +39,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki mission control
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-glib-devel >= 0.61
-Requires:	telepathy-glib-devel >= 0.11.9
+Requires:	telepathy-glib-devel >= 0.13.14
 
 %description devel
 Header files for mission control library.
