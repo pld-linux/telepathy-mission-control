@@ -5,12 +5,13 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.9.0
+Version:	5.9.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	008674ac0ba9fcc161cd222b720a9011
+# Source0-md5:	7bbff153a417403633fc0c96483a77d8
+Patch0:		gio.patch
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
@@ -61,6 +62,7 @@ Dokumentacja API biblioteki mission control.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
