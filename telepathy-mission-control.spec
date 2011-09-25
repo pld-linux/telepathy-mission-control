@@ -5,25 +5,27 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.7.9
+Version:	5.9.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	df7e63d857676fab9ec2261cffe5eb4a
+# Source0-md5:	312fb289f644a90d4514064586445d58
 URL:		http://mission-control.sourceforge.net/
-BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
+BuildRequires:	dbus-devel >= 0.95
 BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	glib2-devel >= 1:2.24.0
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.3}
+BuildRequires:	glib2-devel >= 1:2.28.0
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.17}
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	python-modules
-BuildRequires:	telepathy-glib-devel >= 0.13.14
+BuildRequires:	python >= 2.5
+BuildRequires:	python-modules >= 2.5
+BuildRequires:	rpmbuild(macros) >= 1.527
+BuildRequires:	telepathy-glib-devel >= 0.15.0
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,8 +40,8 @@ Summary:	Header files for mission control library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki mission control
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	dbus-glib-devel >= 0.61
-Requires:	telepathy-glib-devel >= 0.13.14
+Requires:	dbus-glib-devel >= 0.82
+Requires:	telepathy-glib-devel >= 0.15.0
 
 %description devel
 Header files for mission control library.
@@ -70,7 +72,10 @@ Dokumentacja API biblioteki mission control.
 %{__automake}
 %configure \
 	--disable-static \
-	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
+	--disable-aegis \
+	--disable-gnome-keyring \
+	--disable-libaccounts-sso \
+	%{__enable_disable apidocs gtk-doc} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
@@ -81,7 +86,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_datadir}/telepathy/{clients,managers}
+install -d $RPM_BUILD_ROOT%{_datadir}/telepathy/{clients,managers} \
+	   $RPM_BUILD_ROOT%{_libdir}/mission-control-plugins.0
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -109,6 +115,7 @@ fi
 %{_mandir}/man8/mission-control-5.8*
 %attr(755,root,root) %{_libdir}/libmission-control-plugins.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmission-control-plugins.so.0
+%dir %{_libdir}/mission-control-plugins.0
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.AccountManager.service
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl5.service
 %dir %{_datadir}/mission-control
