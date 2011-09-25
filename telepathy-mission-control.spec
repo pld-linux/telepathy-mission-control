@@ -72,7 +72,6 @@ Dokumentacja API biblioteki mission control.
 %{__automake}
 %configure \
 	--disable-static \
-	--disable-aegis \
 	--disable-gnome-keyring \
 	--disable-libaccounts-sso \
 	%{__enable_disable apidocs gtk-doc} \
