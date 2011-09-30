@@ -11,6 +11,7 @@ License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
 # Source0-md5:	312fb289f644a90d4514064586445d58
+Patch0:		gio.patch
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -63,6 +64,7 @@ Dokumentacja API biblioteki mission control.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
