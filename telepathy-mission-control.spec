@@ -5,14 +5,14 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.9.2
+Version:	5.10.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	312fb289f644a90d4514064586445d58
-Patch0:		gio.patch
+# Source0-md5:	50594028ebb2dba0181fec99e6f56ff5
 URL:		http://mission-control.sourceforge.net/
+BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-devel >= 0.95
@@ -27,6 +27,8 @@ BuildRequires:	python >= 2.5
 BuildRequires:	python-modules >= 2.5
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	telepathy-glib-devel >= 0.15.0
+BuildRequires:	upower-devel
+Requires(post,postun):	glib2 >= 1:2.26.0
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,7 +66,6 @@ Dokumentacja API biblioteki mission control.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -102,8 +103,13 @@ if [ -d %{_libexecdir}/mission-control ]; then
 	rm -rf %{_libexecdir}/mission-control
 fi
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post
+/sbin/ldconfig
+%glib_compile_schemas
+
+%postun
+/sbin/ldconfig
+%glib_compile_schemas
 
 %files
 %defattr(644,root,root,755)
@@ -119,6 +125,7 @@ fi
 %dir %{_libdir}/mission-control-plugins.0
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.AccountManager.service
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.MissionControl5.service
+%{_datadir}/glib-2.0/schemas/im.telepathy.MissionControl.FromEmpathy.gschema.xml
 %dir %{_datadir}/mission-control
 %dir %{_datadir}/mission-control/profiles
 %dir %{_datadir}/telepathy
