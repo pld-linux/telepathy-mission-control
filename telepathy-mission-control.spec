@@ -5,12 +5,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.12.0
+Version:	5.12.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	f39dcfef785a37dc21efa9af06be2e61
+# Source0-md5:	79449fd2e1b02fc6cb5c6adc447e2bb6
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
@@ -28,7 +28,9 @@ BuildRequires:	python-modules >= 2.5
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	telepathy-glib-devel >= 0.18.0
 BuildRequires:	upower-devel
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.30.0
+Requires:	dbus-glib >= 0.82
+Requires:	dbus-libs >= 0.95
 Requires:	glib2 >= 1:2.30.0
 Requires:	telepathy-glib >= 0.18.0
 Conflicts:	libtelepathy < 0.3.3-4
@@ -45,6 +47,7 @@ Summary:	Header files for mission control library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki mission control
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
 Requires:	glib2-devel >= 1:2.30.0
 Requires:	telepathy-glib-devel >= 0.18.0
@@ -77,9 +80,9 @@ Dokumentacja API biblioteki mission control.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-static \
 	--disable-gnome-keyring \
 	--disable-libaccounts-sso \
+	--disable-static \
 	%{__enable_disable apidocs gtk-doc} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
@@ -116,7 +119,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/mc-tool
 %attr(755,root,root) %{_bindir}/mc-wait-for-name
 %attr(755,root,root) %{_libexecdir}/mission-control-5
@@ -139,7 +142,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmission-control-plugins.so
 %{_includedir}/mission-control-5.5
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/mission-control-plugins.pc
 
 %if %{with apidocs}
 %files apidocs
