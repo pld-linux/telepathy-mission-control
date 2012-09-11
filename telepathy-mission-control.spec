@@ -51,6 +51,7 @@ Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
 Requires:	glib2-devel >= 1:2.30.0
 Requires:	telepathy-glib-devel >= 0.18.0
+Obsoletes:	telepathy-mission-control-static
 
 %description devel
 Header files for mission control library.
