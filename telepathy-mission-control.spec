@@ -5,12 +5,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.12.2
+Version:	5.14.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	bfffe4ac796a6bef1f336fce0fc42848
+# Source0-md5:	483fa8860891815a540ecf1bb9155122
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
@@ -23,16 +23,16 @@ BuildRequires:	glib2-devel >= 1:2.30.0
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	python >= 2.5
-BuildRequires:	python-modules >= 2.5
+BuildRequires:	python >= 1:2.5
+BuildRequires:	python-modules >= 1:2.5
 BuildRequires:	rpmbuild(macros) >= 1.527
-BuildRequires:	telepathy-glib-devel >= 0.18.0
+BuildRequires:	telepathy-glib-devel >= 0.19.0
 BuildRequires:	upower-devel
 Requires(post,postun):	glib2 >= 1:2.30.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
 Requires:	glib2 >= 1:2.30.0
-Requires:	telepathy-glib >= 0.18.0
+Requires:	telepathy-glib >= 0.19.0
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,7 +50,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
 Requires:	glib2-devel >= 1:2.30.0
-Requires:	telepathy-glib-devel >= 0.18.0
+Requires:	telepathy-glib-devel >= 0.19.0
 Obsoletes:	telepathy-mission-control-static
 
 %description devel
