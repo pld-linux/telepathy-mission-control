@@ -1,3 +1,7 @@
+# TODO:
+# - aegis (libcreds) - MeeGo platform specific?
+# - libaccounts-sso (not only MeeGo, see http://code.google.com/p/accounts-sso/)
+# - mce (Maemo-specific)
 #
 # Conditional build:
 %bcond_without	apidocs		# disable gtk-doc
@@ -5,12 +9,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.14.0
+Version:	5.16.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	483fa8860891815a540ecf1bb9155122
+# Source0-md5:	736ae9d71028d8e6d95017433c07fa06
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
@@ -18,21 +22,21 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-devel >= 0.95
 BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	glib2-devel >= 1:2.30.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.17}
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	python >= 1:2.5
-BuildRequires:	python-modules >= 1:2.5
+BuildRequires:	python >= 1:2.6
+BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpmbuild(macros) >= 1.527
-BuildRequires:	telepathy-glib-devel >= 0.19.0
+BuildRequires:	telepathy-glib-devel >= 0.20.0
 BuildRequires:	upower-devel
-Requires(post,postun):	glib2 >= 1:2.30.0
+Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
-Requires:	glib2 >= 1:2.30.0
-Requires:	telepathy-glib >= 0.19.0
+Requires:	glib2 >= 1:2.32.0
+Requires:	telepathy-glib >= 0.20.0
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,7 +54,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
 Requires:	glib2-devel >= 1:2.30.0
-Requires:	telepathy-glib-devel >= 0.19.0
+Requires:	telepathy-glib-devel >= 0.20.0
 Obsoletes:	telepathy-mission-control-static
 
 %description devel
