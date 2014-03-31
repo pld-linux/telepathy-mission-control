@@ -5,12 +5,13 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# disable gtk-doc
+%bcond_with	upower		# enable legacy UPower support
 #
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
 Version:	5.16.1
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
@@ -31,7 +32,7 @@ BuildRequires:	python >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	telepathy-glib-devel >= 0.20.0
-BuildRequires:	upower-devel
+%{?with_upower:BuildRequires:	upower-devel < 0.99.0}
 Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
@@ -89,6 +90,7 @@ Dokumentacja API biblioteki mission control.
 	--disable-libaccounts-sso \
 	--disable-static \
 	%{__enable_disable apidocs gtk-doc} \
+	%{__enable_disable upower upower} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
