@@ -90,14 +90,13 @@ Dokumentacja API biblioteki mission control.
 	--disable-libaccounts-sso \
 	--disable-static \
 	%{__enable_disable apidocs gtk-doc} \
-	%{__enable_disable upower upower} \
+	%{__enable_disable upower} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/mission-control/profiles
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
