@@ -6,12 +6,12 @@
 # Conditional build:
 %bcond_without	apidocs		# disable gtk-doc
 %bcond_with	upower		# enable legacy UPower support
-#
+
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
 Version:	5.16.1
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
@@ -69,6 +69,9 @@ Summary:	mission control library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki mission control
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 mission control library API documentation.
