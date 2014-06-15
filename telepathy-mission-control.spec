@@ -5,17 +5,18 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# disable gtk-doc
+%bcond_with	uoa		# libaccounts-sso (single sign-on, aka Ubuntu Online Accounts) support
 %bcond_with	upower		# enable legacy UPower support
 
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.16.1
-Release:	3
+Version:	5.16.2
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	421115a35b9e427807326877f86e7f43
+# Source0-md5:	8dc751da77a84abef3f9153bc422a17b
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
@@ -25,6 +26,7 @@ BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	glib2-devel >= 1:2.32.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.17}
+%{?with_uoa:BuildRequires:	libaccounts-glib-devel >= 0.26}
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
@@ -37,6 +39,7 @@ Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
 Requires:	glib2 >= 1:2.32.0
+%{?with_uoa:Requires:	libaccounts-glib >= 0.26}
 Requires:	telepathy-glib >= 0.20.0
 Conflicts:	libtelepathy < 0.3.3-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -89,10 +92,9 @@ Dokumentacja API biblioteki mission control.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-gnome-keyring \
-	--disable-libaccounts-sso \
-	--disable-static \
 	%{__enable_disable apidocs gtk-doc} \
+	%{?with_uoa:--enable-libaccounts-sso} \
+	--disable-static \
 	%{__enable_disable upower} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
