@@ -11,12 +11,12 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.16.3
-Release:	2
+Version:	5.16.4
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	af583c41b97c649c37eebba1f2113427
+# Source0-md5:	eab6c941038702edeece1168f395300c
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
@@ -24,7 +24,7 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-devel >= 0.95
 BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.46.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.17}
 %{?with_uoa:BuildRequires:	libaccounts-glib-devel >= 0.26}
 BuildRequires:	libtool
@@ -38,7 +38,7 @@ BuildRequires:	telepathy-glib-devel >= 0.20.0
 Requires(post,postun):	glib2 >= 1:2.32.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
-Requires:	glib2 >= 1:2.32.0
+Requires:	glib2 >= 1:2.46.0
 %{?with_uoa:Requires:	libaccounts-glib >= 0.26}
 Requires:	telepathy-glib >= 0.20.0
 Conflicts:	libtelepathy < 0.3.3-4
@@ -57,7 +57,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
-Requires:	glib2-devel >= 1:2.30.0
+Requires:	glib2-devel >= 1:2.46.0
 Requires:	telepathy-glib-devel >= 0.20.0
 Obsoletes:	telepathy-mission-control-static
 
