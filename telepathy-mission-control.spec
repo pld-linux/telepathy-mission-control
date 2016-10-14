@@ -15,7 +15,7 @@ Version:	5.16.4
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
+Source0:	https://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
 # Source0-md5:	eab6c941038702edeece1168f395300c
 URL:		http://mission-control.sourceforge.net/
 BuildRequires:	NetworkManager-devel >= 0.7.0
@@ -35,7 +35,7 @@ BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	telepathy-glib-devel >= 0.20.0
 %{?with_upower:BuildRequires:	upower-devel < 0.99.0}
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.46.0
 Requires:	dbus-glib >= 0.82
 Requires:	dbus-libs >= 0.95
 Requires:	glib2 >= 1:2.46.0
