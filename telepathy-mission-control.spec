@@ -1,6 +1,5 @@
 # TODO:
 # - aegis (libcreds) - MeeGo platform specific?
-# - libaccounts-sso (not only MeeGo, see http://code.google.com/p/accounts-sso/)
 # - mce (Maemo-specific)
 #
 # Conditional build:
@@ -11,13 +10,13 @@
 Summary:	A Telepathy account manager
 Summary(pl.UTF-8):	Zarządca kont Telepathy
 Name:		telepathy-mission-control
-Version:	5.16.4
+Version:	5.16.6
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
-# Source0-md5:	eab6c941038702edeece1168f395300c
-URL:		http://mission-control.sourceforge.net/
+# Source0-md5:	911e990c7755eb98a8022223f649405d
+URL:		https://telepathy.freedesktop.org/components/telepathy-mission-control/
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -60,7 +59,7 @@ Requires:	dbus-devel >= 0.95
 Requires:	dbus-glib-devel >= 0.82
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	telepathy-glib-devel >= 0.20.0
-Obsoletes:	telepathy-mission-control-static
+Obsoletes:	telepathy-mission-control-static < 5.5.3
 
 %description devel
 Header files for mission control library.
