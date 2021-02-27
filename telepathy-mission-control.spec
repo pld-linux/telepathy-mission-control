@@ -32,6 +32,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	telepathy-glib-devel >= 0.20.0
 %{?with_upower:BuildRequires:	upower-devel < 0.99.0}
@@ -72,9 +73,7 @@ Summary:	mission control library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki mission control
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 mission control library API documentation.
